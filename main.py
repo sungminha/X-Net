@@ -13,7 +13,8 @@ from loss import get_loss, dice
 from data import create_train_date_generator, create_val_date_generator
 
 
-data_file_path = '/data/data/ATLAS_h5/ATLAS.h5'
+#data_file_path = '/data/data/ATLAS_h5/ATLAS.h5'
+data_file_path = "/scratch/hasm/Data/Lesion/ATLAS_R1.1/train.h5"
 pretrained_weights_file = None
 input_shape = (224, 192, 1)
 batch_size = 8
