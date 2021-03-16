@@ -20,6 +20,7 @@ input_shape = (224, 192, 1)
 batch_size = 8
 num_folds = 5
 
+print("".join(["data_file_path: (", data_file_path, ")"]));
 
 def train(fold, train_patient_indexes, val_patient_indexes):
 
