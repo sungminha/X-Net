@@ -99,7 +99,7 @@ def create_xception_unet_n(input_shape=(224, 192, 1), pretrained_weights_file=No
     x = Conv2D(filters=1, kernel_size=1, activation='sigmoid')(x)
 
     # create model
-    model = Model(input=input, output=x)
+    model = Model(inputs=input, outputs=x)
     model.summary()
     print('Create X-Net with N block, input shape = {}, output shape = {}'.format(input_shape, model.output.shape))
 
