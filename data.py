@@ -14,6 +14,9 @@ def train_data_generator(patient_indexes, h5_file_path, batch_size):
     imgs = file['data']
     labels = file['label']
 
+    #imgs = np.float32(imgs)
+    #labels = np.float32(labels)
+
     # 输入的是病人的index，转换成切片的index
     slice_indexes = []
     for patient_index in patient_indexes:
@@ -47,6 +50,9 @@ def val_data_generator(patient_indexes, h5_file_path, batch_size=1):
     file = h5py.File(h5_file_path, 'r')
     imgs = file['data']
     labels = file['label']
+
+    #imgs = np.float32(imgs)
+    #labels = np.float32(labels)
 
     # 输入的是病人的index，转换成切片的index
     slice_indexes = []
