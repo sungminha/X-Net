@@ -15,4 +15,4 @@ def dice_loss(y_true, y_pred):
 def get_loss(y_true, y_pred):
     return binary_crossentropy(y_true, y_pred) + dice_loss(y_true, y_pred)
 
-
+#dice(y_true, y_pred) the y_true and y_pred should be binary results
