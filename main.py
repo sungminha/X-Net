@@ -110,6 +110,11 @@ def main():
 
 
 if __name__ == '__main__':
+    import tensorflow as tf
+    print("tf.config.experimental.list_physical_devices('GPU')")
+    print(tf.config.experimental.list_physical_devices('GPU'))
+    del tf
+
     os.environ['CUDA_VISIBLE_DEVICES'] = '1'
     main()
 
