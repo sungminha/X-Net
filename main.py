@@ -19,7 +19,8 @@ pretrained_weights_file = None
 input_shape = (224, 192, 1)
 #input_shape = (43281, 233, 197)
 batch_size = 8
-num_folds = 5
+num_folds = 3
+num_epoch =  50
 
 print("".join(["data_file_path: (", data_file_path, ")"]));
 
@@ -50,7 +51,7 @@ def train(fold, train_patient_indexes, val_patient_indexes):
         steps_per_epoch=max(1, num_slices_train // batch_size),
         validation_data=create_val_date_generator(patient_indexes=val_patient_indexes, h5_file_path=data_file_path, batch_size=9),
         validation_steps=max(1, num_slices_val // 9),
-        epochs=100,
+        epochs=num_epoch,
         initial_epoch=0,
         callbacks=[checkpoint, reduce_lr, early_stopping, tensorboard, csv_logger])
     model.save_weights(log_dir + 'trained_final_weights.h5')
@@ -115,6 +116,6 @@ if __name__ == '__main__':
     print(tf.config.experimental.list_physical_devices('GPU'))
     del tf
 
-    os.environ['CUDA_VISIBLE_DEVICES'] = '1'
+    os.environ['CUDA_VISIBLE_DEVICES'] = '0'
     main()
 
