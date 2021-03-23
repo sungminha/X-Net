@@ -65,8 +65,11 @@ def fsm(x):
 
     print("FSL.py: size")
     print(size)
+    print("FSL.py: size[-1]")
+    print(size[-1])
     # scale the values to make it size invariant
-    f = Lambda(lambda z: (1. / float(size[-1])) * z)(f)
+    #f = Lambda(lambda z: (1. / float(size[-1])) * z)(f)
+    f = Lambda(lambda z: (1. / float(size[-1])) * z, dtype='complex64')(f)
 
     # g path
     g = Conv2D(intermediate_dim, (1, 1), padding='same', use_bias=False, kernel_initializer='he_normal',
