@@ -18,6 +18,9 @@ for i in np.arange(max_slice):
   label = np.load(label_path)
   index = np.load(index_path)
   
+  img = np.reshape(img, newshape=(224, 192))
+  label = np.reshape(label, newshape=(224, 192))
+  index = np.reshape(index, newshape=(224, 192))
   plt.imshow(img, cmap='gray') # I would add interpolation='none'
   plt.imshow(label, cmap='Blues', alpha=0.5) # interpolation='none'
   plt.imshow(index, cmap='Reds', alpha=0.5) # interpolation='none'
