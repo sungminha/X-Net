@@ -6,11 +6,21 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 max_slice = 189
-img_path = "/scratch/hasm/Data/Lesion/X-net_Test/X-Net/img.npy"
-label_path = "/scratch/hasm/Data/Lesion/X-net_Test/X-Net/label.npy"
-img = np.load(img_path) #(1, 224, 192, 1)
-label = np.load(label_path)
+# img_path = "/scratch/hasm/Data/Lesion/X-net_Test/X-Net/img.npy"
+# label_path = "/scratch/hasm/Data/Lesion/X-net_Test/X-Net/label.npy"
+# img = np.load(img_path) #(1, 224, 192, 1)
+# label = np.load(label_path)
 for i in np.arange(max_slice):
   index_path = "".join(["/scratch/hasm/Data/Lesion/X-net_Test/X-Net/index_", str(i), ".npy"])
+  img_path = "".join(["/scratch/hasm/Data/Lesion/X-net_Test/X-Net/img_", str(i), ".npy"])
+  label_path = "".join(["/scratch/hasm/Data/Lesion/X-net_Test/X-Net/label_", str(i), ".npy"])
+  img = np.load(img_path)
+  label = np.load(label_path)
   index = np.load(index_path)
-  total = img[0,:,:,]
+  
+  plt.imshow(img, cmap='gray') # I would add interpolation='none'
+  plt.imshow(label, cmap='Blues', alpha=0.5) # interpolation='none'
+  plt.imshow(index, cmap='Reds', alpha=0.5) # interpolation='none'
+
+  #plt.show()
+  plt.savefig("".join("index_", str(i), ".png"))
