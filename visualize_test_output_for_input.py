@@ -27,3 +27,10 @@ for i in np.arange(max_slice):
 
   #plt.show()
   plt.savefig("".join(["index_", str(i), ".png"]))
+  plt.close()
+  del img
+  del label
+  del index
+  del img_path
+  del label_path
+  del index_path
