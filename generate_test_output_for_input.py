@@ -45,6 +45,6 @@ for _ in range(num_slices_val):
     print(np.shape(img))
     print(np.shape(label))
     np.save("".join(["index_", str(_)]), model.predict(img))
+    np.save("".join(["img_", str(_)]), img)
+    np.save("".join(["label_", str(_)]), label)
     
-np.save("img", img)
-np.save("label", label)
