@@ -27,7 +27,7 @@ model = create_xception_unet_n(input_shape=input_shape, pretrained_weights_file=
 print("Generated Model")
 
 val_patient_indexes = np.array([1])
-create_val_date_generator(patient_indexes=val_patient_indexes, h5_file_path=data_file_path)
+f = create_val_date_generator(patient_indexes=val_patient_indexes, h5_file_path=data_file_path)
 # img = nib.load(sample_input).get_fdata()
 # print("img shape")
 # print(np.shape(img))#(197, 233, 189)
