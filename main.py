@@ -22,7 +22,7 @@ batch_size = 8
 num_folds = 3
 num_epoch =  50
 
-print("".join(["data_file_path: (", data_file_path, ")"]));
+print("".join(["data_file_path: (", data_file_path, ")"]))
 
 def train(fold, train_patient_indexes, val_patient_indexes):
 
