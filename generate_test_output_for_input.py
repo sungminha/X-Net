@@ -27,16 +27,20 @@ model = create_xception_unet_n(input_shape=input_shape, pretrained_weights_file=
 print("Generated Model")
 
 val_patient_indexes = np.array([1])
+print("".join(["val_patient_indexes: ", str(val_patient_indexes)]), flush=True)
+
 f = create_val_date_generator(patient_indexes=val_patient_indexes, h5_file_path=data_file_path)
 # img = nib.load(sample_input).get_fdata()
 # print("img shape")
 # print(np.shape(img))#(197, 233, 189)
 # sample_img = img[:,:,90] 
+print("create_val_date_generator finished", flush=True)
 num_slices_val = len(val_patient_indexes) * 189
+print("".join(["num_slices_val: ", str(num_slices_val)]), flush=True)
 for _ in range(num_slices_val):
     
     img, label = f.__next__()
     print(np.shape(img))
     print(np.shape(label))
-    save(model.predict(img))
+    np.save(model.predict(img))
     
