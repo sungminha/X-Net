@@ -15,6 +15,9 @@ print("".join(["data_file_path: (", data_file_path, ")"]))
 
 model = create_xception_unet_n(input_shape=input_shape, pretrained_weights_file=pretrained_weights_file)
 
+print("Generated Model")
+
 img = nib.load(sample_input).get_fdata()
+
 print(np.shape(img))
 model.predict(img)
