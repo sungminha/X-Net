@@ -42,5 +42,5 @@ for _ in range(num_slices_val):
     img, label = f.__next__()
     print(np.shape(img))
     print(np.shape(label))
-    np.save(model.predict(img))
+    np.save("index_1", model.predict(img))
     
