@@ -1,5 +1,7 @@
 """
 testing an input
+
+need to run export HDF5_USE_FILE_LOCKING='FALSE' first in bash
 """
 import keras
 import keras.backend as K
@@ -42,7 +44,7 @@ for _ in range(num_slices_val):
     img, label = f.__next__()
     print(np.shape(img))
     print(np.shape(label))
-    np.save("img", img)
-    np.save("label", label)
-    np.save("index_1", model.predict(img))
+    np.save("".join(["index_", str(_)]), model.predict(img))
     
+np.save("img", img)
+np.save("label", label)
