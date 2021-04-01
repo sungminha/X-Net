@@ -26,4 +26,4 @@ for i in np.arange(max_slice):
   plt.imshow(index, cmap='Reds', alpha=0.5) # interpolation='none'
 
   #plt.show()
-  plt.savefig("".join("index_", str(i), ".png"))
+  plt.savefig("".join(["index_", str(i), ".png"]))
