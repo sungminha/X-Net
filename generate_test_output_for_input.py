@@ -11,6 +11,7 @@ from keras.callbacks import ModelCheckpoint, ReduceLROnPlateau, EarlyStopping, C
 
 from model import create_xception_unet_n
 import nibabel as nib
+from data import create_train_date_generator, create_val_date_generator
 
 data_file_path = "/scratch/hasm/Data/Lesion/ATLAS_R1.1/train.h5"
 pretrained_weights_file = "/scratch/hasm/Data/Lesion/X-net_Test/X-Net/fold_2/trained_final_weights.h5"
@@ -25,8 +26,17 @@ model = create_xception_unet_n(input_shape=input_shape, pretrained_weights_file=
 
 print("Generated Model")
 
-img = nib.load(sample_input).get_fdata()
-print("img shape")
-print(np.shape(img))#(197, 233, 189)
-sample_img = img[:,:,90] 
-model.predict(sample_img)
+val_patient_indexes = np.array([1])
+create_val_date_generator(patient_indexes=val_patient_indexes, h5_file_path=data_file_path)
+# img = nib.load(sample_input).get_fdata()
+# print("img shape")
+# print(np.shape(img))#(197, 233, 189)
+# sample_img = img[:,:,90] 
+num_slices_val = len(val_patient_indexes) * 189
+for _ in range(num_slices_val):
+    
+    img, label = f.__next__()
+    print(np.shape(img))
+    print(np.shape(label))
+    save(model.predict(img))
+    
