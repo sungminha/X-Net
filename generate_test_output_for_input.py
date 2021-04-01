@@ -26,6 +26,7 @@ model = create_xception_unet_n(input_shape=input_shape, pretrained_weights_file=
 print("Generated Model")
 
 img = nib.load(sample_input).get_fdata()
-
-print(np.shape(img))
-model.predict(img)
+print("img shape")
+print(np.shape(img))#(197, 233, 189)
+sample_img = img[:,:,90] 
+model.predict(sample_img)
