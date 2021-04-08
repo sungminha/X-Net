@@ -3,8 +3,8 @@
 ################################## START OF EMBEDDED PBS COMMANDS ##########################
 #PBS -S /bin/bash  #### Default Shell to be Used
 #PBS -N XNet_GenerateValOutputs  #### Job Name to be listed in qstat
-#PBS -o /scratch/hasm/Data/Lesion/X-net_Test/logs/$PBS_JOBNAME_$PBS_JOBID.stdout  #### stdout default path
-#PBS -e /scratch/hasm/Data/Lesion/X-net_Test/logs/$PBS_JOBNAME_$PBS_JOBID.stderr  #### stderr default path
+#PBS -o /scratch/hasm/Data/Lesion/X-net_Test/logs/\${PBS_JOBNAME}_\${PBS_JOBID}.stdout  #### stdout default path
+#PBS -e /scratch/hasm/Data/Lesion/X-net_Test/logs/\${PBS_JOBNAME}_\${PBS_JOBID}.stderr  #### stderr default path
 #PBS -M sungminha@wustl.edu  #### email address to nofity with following options/scenarios
 #PBS -m abe ####abort, end notifications - see below lines for more options
 #PBS -l nodes=1:ppn=1,mem=16gb,walltime=4:00:00 #### 1 node, 1 processor, 1 gpu, 8GB of memory, 15 hours of wall time requests
