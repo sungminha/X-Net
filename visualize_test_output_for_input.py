@@ -46,9 +46,9 @@ img_matrix = np.zeros(shape = (dim_x, dim_y, dim_z))
 label_matrix = np.zeros(shape = (dim_x, dim_y, dim_z))
 
 for i in np.arange(dim_z):
-  gt_path = os.path.join(output_dir, "".join(["index_", str(i), ".npy"]))
+  label_path = os.path.join(output_dir, "".join(["index_", str(i), ".npy"]))
   img_path = os.path.join(output_dir, "".join(["img_", str(i), ".npy"]))
-  label_path = os.path.join(output_dir, "".join(["label_", str(i), ".npy"]))
+  gt_path = os.path.join(output_dir, "".join(["label_", str(i), ".npy"]))
 
   if not (os.path.isfile(gt_path)):
     print("".join(["ERROR: gt file (", str(gt_path), ") does not exist."]), flush=True)
