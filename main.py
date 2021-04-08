@@ -15,14 +15,19 @@ from data import create_train_date_generator, create_val_date_generator
 
 #data_file_path = '/data/data/ATLAS_h5/ATLAS.h5'
 data_file_path = "/scratch/hasm/Data/Lesion/ATLAS_R1.1/train.h5"
+output_
 pretrained_weights_file = None
 input_shape = (224, 192, 1)
 #input_shape = (43281, 233, 197)
 batch_size = 8
-num_folds = 3
-num_epoch =  50
+num_folds = 5
+num_epoch = 100
 
-print("".join(["data_file_path: (", data_file_path, ")"]))
+print("".join(["data_file_path: (", data_file_path, ")"]), flush=True)
+print("".join(["batch_size: (", str(batch_size), ")"]), flush=True)
+print("".join(["num_folds: (", str(num_folds), ")"]), flush=True)
+print("".join(["num_epoch: (", str(num_epoch), ")"]), flush=True)
+
 
 def train(fold, train_patient_indexes, val_patient_indexes):
 
@@ -55,6 +60,10 @@ def train(fold, train_patient_indexes, val_patient_indexes):
         initial_epoch=0,
         callbacks=[checkpoint, reduce_lr, early_stopping, tensorboard, csv_logger])
     model.save_weights(log_dir + 'trained_final_weights.h5')
+    #save model itself
+    model.save(os.path.join(log_dir, 'trained_final_weights'))
+    model.save(os.path.join(log_dir, 'trained_final_weights_h5'), save_format='h5')
+
 
     # Evaluate model
     predicts = []
