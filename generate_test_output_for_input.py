@@ -55,9 +55,21 @@ print("Generated Model")
 
 # val_patient_indexes = np.array([1])
 for patient_index in np.arange(num_patients):
+    num_slices_val = len(val_patient_indexes) * num_slices
     val_patient_indexes = np.array([patient_index])
     print("".join(["val_patient_indexes: ", str(
         val_patient_indexes)]), flush=True)
+
+    output_path_seg_final = os.path.join(output_dir, "".join(
+        ["patient_", str(patient_index), "_seg_", str(num_slices_val-1)]))
+    output_path_img_final = os.path.join(output_dir, "".join(
+        ["patient_", str(patient_index), "_img_", str(num_slices_val-1)]))
+    output_path_gt_final = os.path.join(output_dir, "".join(
+        ["patient_", str(patient_index), "_gt_", str(num_slices_val-1)]))
+    if (os.path.isfile(output_path_gt_final)):
+        print("".join(
+            ["output_path_gt_final (", str(output_path_gt_final), ") already exists. Skipping patient ", str(patient_index)]), flush=True)
+        continue
 
     f = create_val_date_generator(
         patient_indexes=val_patient_indexes, h5_file_path=data_file_path)
@@ -66,11 +78,20 @@ for patient_index in np.arange(num_patients):
     # print(np.shape(img))#(197, 233, 189)
     # sample_img = img[:,:,90]
     print("create_val_date_generator finished", flush=True)
-    num_slices_val = len(val_patient_indexes) * num_slices
     print("".join(["num_slices_val: ", str(num_slices_val)]), flush=True)
     for slice_index in np.arange(num_slices_val):
         print("".join(["patient_index | slice_index: ", str(
-        patient_index), "\t|\t", str(slice_index) ]), flush=True)
+            patient_index), "\t|\t", str(slice_index)]), flush=True)
+        output_path_seg = os.path.join(output_dir, "".join(
+            ["patient_", str(patient_index), "_seg_", str(slice_index)]))
+        output_path_img = os.path.join(output_dir, "".join(
+            ["patient_", str(patient_index), "_img_", str(slice_index)]))
+        output_path_gt = os.path.join(output_dir, "".join(
+            ["patient_", str(patient_index), "_gt_", str(slice_index)]))
+        if (os.path.isfile(output_path_gt)):
+            print("".join(
+                ["output_path_gt (", str(output_path_gt), ") already exists. Skipping patient ", str(patient_index)]), flush=True)
+            continue
         img, label = f.__next__()
         # print(np.shape(img))
         # print(np.shape(label))
@@ -78,9 +99,6 @@ for patient_index in np.arange(num_patients):
         print(patient_index)
         print("num_slices:")
         print(num_slices)
-        np.save( os.path.join(output_dir, "".join(["patient_", str(
-            patient_index), "_seg_", str(slice_index)])), model.predict(img))
-        np.save(os.path.join(output_dir, "".join(
-            ["patient_", str(patient_index), "_img_", str(slice_index)])), img)
-        np.save(os.path.join(output_dir, "".join(
-            ["patient_", str(patient_index), "_gt_", str(slice_index)])), label)
+        np.save(output_path_seg, model.predict(img))
+        np.save(output_path_img, img)
+        np.save(output_path_gt, label)
