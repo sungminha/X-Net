@@ -23,8 +23,12 @@ export HDF5_USE_FILE_LOCKING='FALSE'";
 export HDF5_USE_FILE_LOCKING='FALSE';
 
 echo -e "\n\n \
-conda activate py3_7_xnet";
-conda activate py3_7_xnet;
+conda info --envs;";
+conda info --envs;
+
+echo -e "\n\n \
+source activate py3_7_xnet";
+source activate py3_7_xnet;
 
 cd "${parent_dir}";
 echo -e "\n\n \
