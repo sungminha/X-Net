@@ -18,7 +18,7 @@ else:
   print("".join(["ERROR: Unknown username (", str(username), "). Exiting"]))
   sys.exit()
 
-output_dir = os.path.join(xnet_dir, "X-Net_20210408_CompleteDataset_5Folds", "sample_test" )
+output_dir = os.path.join(xnet_dir, "X-Net_20210401_CompleteDataSet_3Folds", "sample_test" )
 
 if not (os.path.isdir(output_dir)):
     print("".join(["ERROR: output directory (", str(output_dir), ") does not exist."]), flush=True)
