@@ -8,8 +8,9 @@ from matplotlib import pyplot as plt
 import nibabel as nib
 
 #assumes you are on CHPC or CHPC 2021 (Linux HPC Cluster); change detailed directories accordingly for each output
-username = os.getlogin()
-lesion_dir = os.path.join("scratch", str(username), "Data", "Lesion")
+#username = os.getlogin()
+username = "hasm" #override because CHPC returns root
+lesion_dir = os.path.join("/scratch", str(username), "Data", "Lesion")
 if ( username == "sungminha" ):
   xnet_dir = os.path.join(lesion_dir, "X-net" )
 elif ( username == "hasm" ):
@@ -66,9 +67,9 @@ for i in np.arange(dim_z):
   del label_path
   del gt_path
 
-  gt_matrix[:,:,i] = gt
-  img_matrix[:,:,i] = img
-  label_matrix[:,:,i] = label
+  gt_matrix[:,:,i] = np.reshape(gt, newshape=(224,192))
+  img_matrix[:,:,i] = np.reshape(img, newshape=(224,192))
+  label_matrix[:,:,i] = np.reshape(label, newshape=(224,192))
   
   img = np.reshape(img, newshape=(224, 192))
   label = np.reshape(label, newshape=(224, 192))
@@ -88,11 +89,11 @@ for i in np.arange(dim_z):
 reference = nib.load(reference_path)
 empty_header = nib.Nifti1Header()
 
-img_nii = nib.Nifti1Image(img, reference.affine, empty_header)
+img_nii = nib.Nifti1Image(img_matrix, reference.affine, empty_header)
 nib.save(img_nii, os.path.join( output_dir, 'img.nii.gz'))
 
-label_nii = nib.Nifti1Image(label, reference.affine, empty_header)
+label_nii = nib.Nifti1Image(label_matrix, reference.affine, empty_header)
 nib.save(label_nii, os.path.join( output_dir, 'label.nii.gz'))
 
-gt_nii = nib.Nifti1Image(gt, reference.affine, empty_header)
+gt_nii = nib.Nifti1Image(gt_matrix, reference.affine, empty_header)
 nib.save(gt_nii, os.path.join( output_dir, 'gt.nii.gz'))
