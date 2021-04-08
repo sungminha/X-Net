@@ -68,6 +68,8 @@ for patient_index in np.arange(num_patients):
     num_slices_val = len(val_patient_indexes) * 189
     print("".join(["num_slices_val: ", str(num_slices_val)]), flush=True)
     for slice_index in range(num_slices_val):
+        print("".join(["val_patient_indexes | slice_index: ", str(
+        val_patient_indexes), "\t|\t", str(slice_index) ]), flush=True)
         img, label = f.__next__()
         # print(np.shape(img))
         # print(np.shape(label))
