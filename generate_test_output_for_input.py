@@ -20,6 +20,7 @@ from data import create_train_date_generator, create_val_date_generator
 data_file_path = "/scratch/hasm/Data/Lesion/ATLAS_R1.1/train.h5"
 input_shape = (224, 192, 1)
 num_patients = 229
+num_slices = 189
 parent_dir = os.path.join("/scratch/hasm", "Data", "Lesion")
 xnet_dir = os.path.join(parent_dir, "X-net_Test",
                         "X-Net_20210401_CompleteDataSet_3Folds")
@@ -65,14 +66,18 @@ for patient_index in np.arange(num_patients):
     # print(np.shape(img))#(197, 233, 189)
     # sample_img = img[:,:,90]
     print("create_val_date_generator finished", flush=True)
-    num_slices_val = len(val_patient_indexes) * 189
+    num_slices_val = len(val_patient_indexes) * num_slices
     print("".join(["num_slices_val: ", str(num_slices_val)]), flush=True)
-    for slice_index in range(num_slices_val):
-        print("".join(["val_patient_indexes | slice_index: ", str(
-        val_patient_indexes), "\t|\t", str(slice_index) ]), flush=True)
+    for slice_index in np.arange(num_slices_val):
+        print("".join(["patient_index | slice_index: ", str(
+        patient_index), "\t|\t", str(slice_index) ]), flush=True)
         img, label = f.__next__()
         # print(np.shape(img))
         # print(np.shape(label))
+        print("patient_index:")
+        print(patient_index)
+        print("num_slices:")
+        print(num_slices)
         np.save(os.path.join(output_dir, "".join(["patient_", str(
             patient_index), "_seg_", str(slice_index)]), model.predict(img)))
         np.save(os.path.join(output_dir, "".join(
