@@ -78,9 +78,9 @@ for patient_index in np.arange(num_patients):
         print(patient_index)
         print("num_slices:")
         print(num_slices)
-        np.save(os.path.join(output_dir, "".join(["patient_", str(
-            patient_index), "_seg_", str(slice_index)]), model.predict(img)))
+        np.save( os.path.join(output_dir, "".join(["patient_", str(
+            patient_index), "_seg_", str(slice_index)])), model.predict(img))
         np.save(os.path.join(output_dir, "".join(
-            ["patient_", str(patient_index), "_img_", str(slice_index)]), img))
+            ["patient_", str(patient_index), "_img_", str(slice_index)])), img)
         np.save(os.path.join(output_dir, "".join(
-            ["patient_", str(patient_index), "_gt_", str(slice_index)]), label))
+            ["patient_", str(patient_index), "_gt_", str(slice_index)])), label)
