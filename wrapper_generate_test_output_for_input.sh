@@ -12,19 +12,51 @@
 
 parent_dir="/home/hasm/comp_space/Data/Lesion/X-net_Test/X-Net_20210401_CompleteDataSet_3Folds";
 script="${parent_dir}/generate_test_output_for_input.py";
+VERBOSE=0; #choose 0 or 1
+
 if [ ! -e "${script}" ];
 then
   echo -e "ERROR: script ( ${script} ) does not exist.";
   return;
 fi;
 
+if [ "${VERBOSE}" == "1" ];
+then
+  echo -e "\n\n \
+  module avail";
+  module avail;
+
+  echo -e "\n\n \
+  module list";
+  module list;
+fi;
+
+echo -e "\n\n \
+module load cuda-10.0";
+module load cuda-10.0;
+
+if [ "${VERBOSE}" == "1" ];
+then
+  echo -e "\n\n \
+  module list";
+  module list;
+
+  echo -e "\n\n \
+  nvidia-smi";
+  nvidia-smi;
+fi;
+
 echo -e "\n\n \
 export HDF5_USE_FILE_LOCKING='FALSE'";
 export HDF5_USE_FILE_LOCKING='FALSE';
 
-echo -e "\n\n \
-conda info --envs;";
-conda info --envs;
+
+if [ "${VERBOSE}" == "1" ];
+then
+  echo -e "\n\n \
+  conda info --envs;";
+  conda info --envs;
+fi;
 
 echo -e "\n\n \
 source activate py3_7_xnet";
