@@ -67,9 +67,9 @@ for patient_index in np.arange(num_patients):
         ["patient_", str(patient_index), "_img_", str(num_slices_val-1)]))
     output_path_gt_final = os.path.join(output_dir, "".join(
         ["patient_", str(patient_index), "_gt_", str(num_slices_val-1)]))
-    if (os.path.isfile(output_path_gt_final)):
+    if (os.path.isfile("".join([output_path_gt_final, ".npy"]))):
         print("".join(
-            ["output_path_gt_final (", str(output_path_gt_final), ") already exists. Skipping patient ", str(patient_index)]), flush=True)
+            ["output_path_gt_final (", str("".join([output_path_gt_final, ".npy"])), ") already exists. Skipping patient ", str(patient_index)]), flush=True)
         continue
 
     f = create_val_date_generator(
@@ -91,7 +91,7 @@ for patient_index in np.arange(num_patients):
             ["patient_", str(patient_index), "_gt_", str(slice_index)]))
         if (os.path.isfile(output_path_gt)):
             print("".join(
-                ["output_path_gt (", str(output_path_gt), ") already exists. Skipping patient ", str(patient_index)]), flush=True)
+                ["output_path_gt (", str("".join([output_path_gt, ".npy"])), ") already exists. Skipping patient ", str(patient_index)]), flush=True)
             continue
         img, label = f.__next__()
         # print(np.shape(img))
