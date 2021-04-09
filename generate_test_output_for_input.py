@@ -55,8 +55,9 @@ print("Generated Model")
 
 # val_patient_indexes = np.array([1])
 for patient_index in np.arange(num_patients):
-    num_slices_val = len(val_patient_indexes) * num_slices
     val_patient_indexes = np.array([patient_index])
+    num_slices_val = len(val_patient_indexes) * num_slices
+
     print("".join(["val_patient_indexes: ", str(
         val_patient_indexes)]), flush=True)
 
