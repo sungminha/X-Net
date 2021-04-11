@@ -10,13 +10,23 @@
 #PBS -l nodes=1:ppn=1,mem=32gb,walltime=24:00:00 #### 1 node, 1 processor, 1 gpu, 8GB of memory, 15 hours of wall time requests
 ############################## END OF DEFAULT EMBEDDED PBS COMMANDS #######################
 
+#HELP
+#This function geenrates npy (numpy array) predictions using generate_test_output_for_input.py, then proceeds to generate corresponding nifti outputs using visualize_test_output_for_input.py
+
 parent_dir="/home/hasm/comp_space/Data/Lesion/X-net_Test/X-Net_20210401_CompleteDataSet_3Folds";
-script="${parent_dir}/generate_test_output_for_input.py";
+generate_script="${parent_dir}/generate_test_output_for_input.py";
+visualize_script="${parent_dir}/visualize_test_output_for_input.py";
 VERBOSE=0; #choose 0 or 1
 
-if [ ! -e "${script}" ];
+if [ ! -e "${generate_script}" ];
 then
-  echo -e "ERROR: script ( ${script} ) does not exist.";
+  echo -e "ERROR: generate_script ( ${generate_script} ) does not exist.";
+  return;
+fi;
+
+if [ ! -e "${visualize_script}" ];
+then
+  echo -e "ERROR: visualize_script ( ${visualize_script} ) does not exist.";
   return;
 fi;
 
@@ -67,4 +77,10 @@ echo -e "\n\n \
 pwd";
 pwd;
 
-python ${script};
+echo -e "\n\n \
+python ${generate_script}";
+python ${generate_script};
+
+echo -e "\n\n \
+python ${visualize_script}";
+python ${visualize_script};
