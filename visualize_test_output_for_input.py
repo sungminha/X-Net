@@ -47,6 +47,17 @@ dim_z = 189  # 224x192x189 is full image; this may change with input data
 # start generating output images and output nii.gz
 
 for patient_index in np.arange(num_patients):
+    output_path_img = os.path.join(output_dir, "".join(
+        ["patient_", str(patient_index), "_img.nii.gz"]))
+    output_path_seg = os.path.join(output_dir, "".join(
+        ["patient_", str(patient_index), "_seg.nii.gz"]))
+    output_path_gt = os.path.join(output_dir, "".join(
+        ["patient_", str(patient_index), "_gt.nii.gz"]))
+    if (output_path_gt):
+        print("".join(
+            ["output_path_gt (", str(output_path_gt), ") already exists. Skipping patient ", str(patient_index)]), flush=True)
+        continue
+
     gt_matrix = np.zeros(shape=(dim_x, dim_y, dim_z))  # ground truth
     img_matrix = np.zeros(shape=(dim_x, dim_y, dim_z))  # image
     seg_matrix = np.zeros(shape=(dim_x, dim_y, dim_z))  # segmentation
@@ -103,14 +114,21 @@ for patient_index in np.arange(num_patients):
     empty_header = nib.Nifti1Header()
 
     img_nii = nib.Nifti1Image(img_matrix, reference.affine, empty_header)
-    nib.save(img_nii, os.path.join(output_dir, 'img.nii.gz'))
+
+    nib.save(img_nii, output_path_img)
     del img_matrix
     del img_nii
+
     seg_nii = nib.Nifti1Image(seg_matrix, reference.affine, empty_header)
-    nib.save(seg_nii, os.path.join(output_dir, 'seg.nii.gz'))
+    nib.save(seg_nii, output_path_seg)
     del seg_matrix
     del seg_nii
+
     gt_nii = nib.Nifti1Image(gt_matrix, reference.affine, empty_header)
-    nib.save(gt_nii, os.path.join(output_dir, 'gt.nii.gz'))
+    nib.save(gt_nii, output_path_gt)
     del gt_matrix
     del gt_nii
+
+    del output_path_img
+    del output_path_seg
+    del output_path_gt
