@@ -20,7 +20,7 @@ else:
     sys.exit()
 
 output_dir = os.path.join(
-    xnet_dir, "X-Net_20210401_CompleteDataSet_3Folds", "sample_test")
+    xnet_dir, "X-Net_20210401_CompleteDataSet_3Folds", "output_visualization")
 num_patients = 229
 
 if not (os.path.isdir(output_dir)):
@@ -53,7 +53,7 @@ for patient_index in np.arange(num_patients):
         ["patient_", str(patient_index), "_seg.nii.gz"]))
     output_path_gt = os.path.join(output_dir, "".join(
         ["patient_", str(patient_index), "_gt.nii.gz"]))
-    if (output_path_gt):
+    if (os.path.isfile(output_path_gt)):
         print("".join(
             ["output_path_gt (", str(output_path_gt), ") already exists. Skipping patient ", str(patient_index)]), flush=True)
         continue
