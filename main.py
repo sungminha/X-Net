@@ -28,6 +28,9 @@ elif os.path.isdir("/scratch/sungminha"):
 
 print("".join(["data_file_path: (", str(data_file_path),")"]))
     
+if not (os.path.isfile(data_file_path)):
+    print("".join(["ERROR: data_file_path (", str(data_file_path), ") does not exist."]))
+    return
 pretrained_weights_file = None
 input_shape = (224, 192, 1)
 batch_size = 8
