@@ -13,11 +13,23 @@ from loss import get_loss, dice
 from data import create_train_date_generator, create_val_date_generator
 
 
+#default from github source
 #data_file_path = '/data/data/ATLAS_h5/ATLAS.h5'
-data_file_path = "/scratch/hasm/Data/Lesion/ATLAS_R1.1/train.h5"
+#if on CHPC1
+if os.path.isdir("/scratch/hasm"):
+    scratch_dir = os.path.join("/scratch/hasm")
+    print("".join(["ON old CHPC (~2020): using scratch directory (", str(scratch_dir), ")"]))
+    data_file_path = os.path.join(scratch_dir, "Data", "Lesion", "ATLAS_R1.1", "train.h5")
+#if on CHPC3
+elif os.path.isdir("/scratch/sungminha"):
+    scratch_dir = os.path.join("/scratch/sungminha")
+    print("".join(["ON new CHPC (2021~): using scratch directory (", str(scratch_dir), ")"]))
+    data_file_path = os.path.join(scratch_dir, "Data", "Lesion", "ATLAS_R1.1", "train.h5") 
+
+print("".join(["data_file_path: (", str(data_file_path),")"]))
+    
 pretrained_weights_file = None
 input_shape = (224, 192, 1)
-#input_shape = (43281, 233, 197)
 batch_size = 8
 num_folds = 5
 num_epoch = 100
