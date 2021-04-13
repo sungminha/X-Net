@@ -21,7 +21,7 @@ from data import create_train_date_generator, create_val_date_generator
 data_file_path = "/home/hasm/comp_space/Data/Lesion/ATLAS_R1.1/Sample_Visualization/train.h5"
 input_shape = (224, 192, 1)
 # num_patients = 229
-num_patients = 3
+num_patients = 2
 num_slices = 189
 parent_dir = os.path.join("/scratch/hasm", "Data", "Lesion")
 xnet_dir = os.path.join(parent_dir, "X-net_Test",
@@ -118,6 +118,7 @@ for patient_index in np.arange(num_patients):
 
 #part 1: attention outputs
 output_dir = os.path.join(attention_dir, "output_visualization")
+print("".join(["output_dir: (", str(output_dir),")"]))
 
 if not (os.path.isfile(attention_pretrained_weights_file)):
     print("".join(["ERROR: Attention pretrained weights file (", str(
