@@ -21,10 +21,10 @@ else:
 
 #xnet
 output_dir = os.path.join(
-    xnet_dir, "X-Net_20210401_CompleteDataSet_3Folds", "output_visualization")
+    xnet_dir, "X-Net_20210413_SampleVisualization", "output_visualization")
 
 # num_patients = 229
-num_patients = 3
+num_patients = 2
 
 if not (os.path.isdir(output_dir)):
     print("".join(["ERROR: output directory (", str(
@@ -138,7 +138,7 @@ for patient_index in np.arange(num_patients):
 
 #attention
 output_dir = os.path.join(
-    lesion_dir, "AttentionUnet_Test", "sample_visualization")
+    lesion_dir, "AttentionUnet_Test", "output_visualization")
 
 
 if not (os.path.isdir(output_dir)):
