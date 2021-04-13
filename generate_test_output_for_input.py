@@ -32,7 +32,7 @@ xnet_pretrained_weights_file = os.path.join(
     parent_dir, "X-net_Test", "X-Net_20210401_CompleteDataSet_3Folds", "fold_2", "trained_final_weights.h5")
 #for attention unet
 attention_pretrained_weights_file = os.path.join(
-    attention_dir, "trained_model.h5")
+    attention_dir, "trained_models.h5")
 
 # data_file_path = os.path.join(parent_dir, "ATLAS_R1.1", "train.h5")
 data_file_path = os.path.join(parent_dir, "ATLAS_R1.1", "Sample_Visualization", "train.h5")
