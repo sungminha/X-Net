@@ -34,7 +34,7 @@ if not (os.path.isfile(data_file_path)):
     sys.exit()
 pretrained_weights_file = None
 input_shape = (224, 192, 1)
-batch_size = 8
+batch_size = 4
 num_folds = 5
 num_epoch = 100
 
