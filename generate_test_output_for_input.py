@@ -25,11 +25,11 @@ num_patients = 3
 num_slices = 189
 parent_dir = os.path.join("/scratch/hasm", "Data", "Lesion")
 xnet_dir = os.path.join(parent_dir, "X-net_Test",
-                        "X-Net_20210401_CompleteDataSet_3Folds")
+                        "X-Net_20210413_SampleVisualization")
 attention_dir = os.path.join(parent_dir, "AttentionUnet_Test")
 #for xnet
 xnet_pretrained_weights_file = os.path.join(
-    xnet_dir, "fold_2", "trained_final_weights.h5")
+    parent_dir, "X-net_Test", "X-Net_20210401_CompleteDataSet_3Folds", "fold_2", "trained_final_weights.h5")
 #for attention unet
 attention_pretrained_weights_file = os.path.join(
     attention_dir, "trained_model.h5")
