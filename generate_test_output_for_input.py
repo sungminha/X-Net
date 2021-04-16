@@ -186,8 +186,7 @@ print("".join(["attention_pretrained_weights_file: (", str(attention_pretrained_
 model = create_xception_unet_n(
     input_shape=input_shape, pretrained_weights_file=attention_pretrained_weights_file)
 
-print("Generated Model")
->>>>>>> b8547203b7e7908e3fa989d2a460bccfa815f27c
+print("Generated Model", flush=True)
 
 # val_patient_indexes = np.array([1])
 for patient_index in np.arange(num_patients):
@@ -203,7 +202,7 @@ for patient_index in np.arange(num_patients):
         ["patient_", str(patient_index), "_img_", str(num_slices_val-1)]))
     output_path_gt_final = os.path.join(output_dir, "".join(
         ["patient_", str(patient_index), "_gt_", str(num_slices_val-1)]))
-    if (os.path.isfile("".join([output_path_gt_final, ".npy"]))):
+    if (os.path.isfile("".join([output_path_gt_final, ".npy"])))
         print("".join(
             ["output_path_gt_final (", str("".join([output_path_gt_final, ".npy"])), ") already exists. Skipping patient ", str(patient_index)]), flush=True)
         continue
