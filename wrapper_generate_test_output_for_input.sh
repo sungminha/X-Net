@@ -123,26 +123,29 @@ do
     continue;
   fi;
 
+  outdir="${output_dir}/${site}/${id}/${timepoint}";
+  mkdir -pv "${outdir}";
+
   echo -e "\n\n \
   python ${generate_script} \
   --data-file-path \"${data_file}\" \
   --num-patients 1 \
   --num-slices 189 \
   --xnet-pretrained-weights-file \"${pretrained_weight_file}\" \
-  --output-dir \"${output_dir}\"";
+  --output-dir \"${outdir}\"";
 
   python ${generate_script} \
   --data-file-path "${data_file}" \
   --num-patients 1 \
   --num-slices 189 \
   --xnet-pretrained-weights-file "${pretrained_weight_file}" \
-  --output-dir "${output_dir}";
+  --output-dir "${outdir}";
 
   echo -e "\n\n \
   python ${visualize_script} \
   --num-patients 1 \
-  --output-dir \"${output_dir}\";";
+  --output-dir \"${outdir}\";";
   python ${visualize_script} \
   --num-patients 1 \
-  --output-dir "${output_dir}";
+  --output-dir "${outdir}";
 done
