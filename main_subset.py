@@ -37,11 +37,13 @@ input_shape = (224, 192, 1)
 batch_size = 8
 num_folds = 5
 num_epoch = 100
+num_subject = 56
 
 print("".join(["data_file_path: (", data_file_path, ")"]), flush=True)
 print("".join(["batch_size: (", str(batch_size), ")"]), flush=True)
 print("".join(["num_folds: (", str(num_folds), ")"]), flush=True)
 print("".join(["num_epoch: (", str(num_epoch), ")"]), flush=True)
+print("".join(["num_subject: (", str(num_subject), ")"]), flush=True)
 
 
 def train(fold, train_patient_indexes, val_patient_indexes):
@@ -109,7 +111,7 @@ def train(fold, train_patient_indexes, val_patient_indexes):
 
 def main():
     # prepare indexes of patients for training and validation, respectively
-    num_patients = 229
+    num_patients = num_subject
     patients_indexes = np.array([i for i in range(num_patients)])
     kf = KFold(n_splits=num_folds, shuffle=False)
 
