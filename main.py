@@ -34,7 +34,7 @@ if not (os.path.isfile(data_file_path)):
     sys.exit()
 pretrained_weights_file = None
 input_shape = (224, 192, 1)
-batch_size = 4
+batch_size = 8
 num_folds = 5
 num_epoch = 100
 
@@ -76,8 +76,8 @@ def train(fold, train_patient_indexes, val_patient_indexes):
         callbacks=[checkpoint, reduce_lr, early_stopping, tensorboard, csv_logger])
     model.save_weights(log_dir + 'trained_final_weights.h5')
     #save model itself
-    model.save(os.path.join(log_dir, 'trained_final_weights'))
-    model.save(os.path.join(log_dir, 'trained_final_weights_h5'), save_format='h5')
+    model.save(os.path.join(log_dir, 'trained_final_model'))
+    # model.save(os.path.join(log_dir, 'trained_final_model.h5'))
 
 
     # Evaluate model
