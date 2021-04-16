@@ -13,14 +13,44 @@
 #HELP
 #This function geenrates npy (numpy array) predictions using generate_test_output_for_input.py, then proceeds to generate corresponding nifti outputs using visualize_test_output_for_input.py
 
-parent_dir="/home/hasm/comp_space/Data/Lesion/X-net_Test/X-Net_20210401_CompleteDataSet_3Folds";
-generate_script="${parent_dir}/generate_test_output_for_input.py";
-visualize_script="${parent_dir}/visualize_test_output_for_input.py";
+git_dir="/scratch/hasm/git/WUSTL_2021A_ESE_5934_XNet";
+parent_dir="/scratch/hasm/Data/Lesion";
+xnet_dir="${parent_dir}/X-net_Test/X-Net_20210401_CompleteDataSet_3Folds";
+generate_script="${git_dir}/generate_test_output_for_input.py";
+visualize_script="${git_dir}/visualize_test_output_for_input.py";
 VERBOSE=0; #choose 0 or 1
+list="${parent_dir}/ATLAS_R1.1_Lists/Sample_Visualization_Site_ID_Timepoint.csv";
+data_dir="${parent_dir}/ATLAS_R1.1/Sample_Visualization";
+pretrained_weight_file="${xnet_dir}/fold_0/trained_final_weights.h5";
+output_dir="${xnet_dir}/output_visualization/fold_0";
+
+if [ ! -d "${data_dir}" ];
+then
+  echo -e "ERROR: data_dir ( ${data_dir} ) does not exist.";
+  return;
+fi;
+
+if [ ! -d "${output_dir}" ];
+then
+  echo -e "ERROR: output_dir ( ${output_dir} ) does not exist.";
+  return;
+fi;
 
 if [ ! -e "${generate_script}" ];
 then
   echo -e "ERROR: generate_script ( ${generate_script} ) does not exist.";
+  return;
+fi;
+
+if [ ! -e "${pretrained_weight_file}" ];
+then
+  echo -e "ERROR: pretrained_weight_file ( ${pretrained_weight_file} ) does not exist.";
+  return;
+fi;
+
+if [ ! -e "${list}" ];
+then
+  echo -e "ERROR: list ( ${list} ) does not exist.";
   return;
 fi;
 
@@ -72,15 +102,47 @@ echo -e "\n\n \
 source activate py3_7_xnet";
 source activate py3_7_xnet;
 
-cd "${parent_dir}";
-echo -e "\n\n \
-pwd";
-pwd;
+# cd "${parent_dir}";
+# echo -e "\n\n \
+# pwd";
+# pwd;
 
-echo -e "\n\n \
-python ${generate_script}";
-python ${generate_script};
+for i in `sed 1d ${list}`;
+do
+  site=`echo ${i} | cut -d, -f1`;
+  id=`echo ${i} | cut -d, -f2`;
+  timepoint=`echo ${i} | cut -d, -f3`;
+  echo -e "\n\n \
+  ${i}\t|\t${num_subject} - ${site} | ${id} | ${timepoint}";
 
-echo -e "\n\n \
-python ${visualize_script}";
-python ${visualize_script};
+  data_file="${data_dir}/${site}/${id}/${timepoint}/train.h5";
+  if [ ! -e "${data_file}" ];
+  then
+    echo -e "\n\n \
+    ERROR: data_file ( ${data_file} ) does not exist.";
+    continue;
+  fi;
+
+  echo -e "\n\n \
+  python ${generate_script} \
+  --data-file-path \"${data_file}\" \
+  --num-patients 1 \
+  --num-slices 189 \
+  --xnet-pretrained-weights-file \"${pretrained_weight_file}\" \
+  --output-dir \"${output_dir}\"";
+
+  python ${generate_script} \
+  --data-file-path "${data_file}" \
+  --num-patients 1 \
+  --num-slices 189 \
+  --xnet-pretrained-weights-file "${pretrained_weight_file}" \
+  --output-dir "${output_dir}";
+
+  echo -e "\n\n \
+  python ${visualize_script} \
+  --num-patients 1 \
+  --output-dir \"${output_dir}\";";
+  python ${visualize_script} \
+  --num-patients 1 \
+  --output-dir "${output_dir}";
+done
