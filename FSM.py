@@ -16,15 +16,9 @@ def conv2d_bn_relu(input, filters, kernel_size, strides=(1,1), padding='same', d
 
 
 def fsm(x):
-    print("FSM.py: x")
-    print(x)
     channel_num = x.shape[-1]
-    print("FSM.py: channel_num")
-    print(channel_num)
-    
+
     res = x
-    print("FSM.py: res")
-    print(res)
 
     x = conv2d_bn_relu(x, filters=int(channel_num // 8), kernel_size=(3, 3))
 
@@ -32,11 +26,6 @@ def fsm(x):
 
     ip = x
     ip_shape = K.int_shape(ip)
-    print("FSM.py: ip")
-    print(ip)
-    print("FSM.py: ip_shape")
-    print(ip_shape)
-
     batchsize, dim1, dim2, channels = ip_shape
     intermediate_dim = channels // 2
     rank = 4
@@ -55,21 +44,9 @@ def fsm(x):
 
     # dot
     f = dot([theta, phi], axes=2)
-    print("FSL.py: theta")
-    print(theta)
-    print("FSL.py: phi")
-    print(phi)
-    print("FSL.py: f")
-    print(f)
     size = K.int_shape(f)
-
-    print("FSL.py: size")
-    print(size)
-    print("FSL.py: size[-1]")
-    print(size[-1])
     # scale the values to make it size invariant
-    #f = Lambda(lambda z: (1. / float(size[-1])) * z)(f)
-    f = Lambda(lambda z: (1. / float(size[-1])) * z, dtype='complex64')(f)
+    f = Lambda(lambda z: (1. / float(size[-1])) * z)(f)
 
     # g path
     g = Conv2D(intermediate_dim, (1, 1), padding='same', use_bias=False, kernel_initializer='he_normal',
