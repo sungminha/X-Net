@@ -32,7 +32,7 @@ elif os.path.isdir("/scratch/sungminha"):
     # data_file_path = os.path.join(scratch_dir, "Data", "Lesion", "ATLAS_R1.1_Protocols", "0_freesurfer-6.0.0_full_improved_symlink", "train_brainmask.h5") 
 
     #for subset
-    data_file_path = os.path.join(scratch_dir, "Data", "Lesion", "ATLAS_R1.1_Protocols", "0_freesurfer-6.0.0_full_improved_symlink", "train_brainmask.h5") 
+    data_file_path = os.path.join(scratch_dir, "Data", "Lesion", "ATLAS_R1.1_Protocols", "0_freesurfer-6.0.0_full_improved_symlink", "train_brainmask_subset.h5") 
 
 print("".join(["data_file_path: (", str(data_file_path),")"]))
     
