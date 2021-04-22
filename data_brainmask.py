@@ -36,8 +36,8 @@ def train_data_generator(patient_indexes, h5_file_path, batch_size):
             if i == 0:
                 np.random.shuffle(slice_indexes)
 
-            current_img = imgs[slice_indexes[i]][5:(dim_x-4), 2:(dim_y-3)]
-            current_label = labels[slice_indexes[i]][5:(dim_x-4), 2:(dim_y-3)]
+            current_img = imgs[slice_indexes[i]][16:(dim_x-16), 32:(dim_y-32)]
+            current_label = labels[slice_indexes[i]][16:(dim_x-16), 32:(dim_y-32)]
             batch_img.append(current_img)
             batch_label.append(current_label)
             i = (i + 1) % num_of_slices
@@ -69,8 +69,8 @@ def val_data_generator(patient_indexes, h5_file_path, batch_size=1):
         batch_img = []
         batch_label = []
         for b in range(batch_size):
-            current_img = imgs[slice_indexes[i]][5:(dim_x-4), 2:(dim_y-3)]
-            current_label = labels[slice_indexes[i]][5:(dim_x-4), 2:(dim_y-3)]
+            current_img = imgs[slice_indexes[i]][16:(dim_x-16), 32:(dim_y-32)]
+            current_label = labels[slice_indexes[i]][16:(dim_x-16), 32:(dim_y-32)]
             batch_img.append(current_img)
             batch_label.append(current_label)
             i = (i + 1) % num_of_slices

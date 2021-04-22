@@ -40,7 +40,8 @@ if not (os.path.isfile(data_file_path)):
     print("".join(["ERROR: data_file_path (", str(data_file_path), ") does not exist."]))
     sys.exit()
 pretrained_weights_file = None
-input_shape = (247, 251, 1) #for FS space data
+input_shape = (224, 192, 1)
+# input_shape = (247, 251, 1) #for FS space data
 # input_shape = (256, 256, 1) #for FS space data
 dim_z = 256
 #58624, 256, 256; 256 slices of 256x256, 229 patients
