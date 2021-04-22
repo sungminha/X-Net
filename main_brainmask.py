@@ -42,6 +42,7 @@ if not (os.path.isfile(data_file_path)):
 pretrained_weights_file = None
 input_shape = (247, 251, 1) #for FS space data
 # input_shape = (256, 256, 1) #for FS space data
+dim_z = 256
 #14336, 256, 256
 batch_size = 8
 num_folds = 5
