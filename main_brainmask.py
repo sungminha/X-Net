@@ -40,17 +40,23 @@ if not (os.path.isfile(data_file_path)):
     print("".join(["ERROR: data_file_path (", str(data_file_path), ") does not exist."]))
     sys.exit()
 pretrained_weights_file = None
-input_shape = (256, 256, 1) #for FS space data
+input_shape = (247, 251, 1) #for FS space data
+# input_shape = (256, 256, 1) #for FS space data
 #14336, 256, 256
 batch_size = 8
 num_folds = 5
 num_epoch = 100
+# num_subjects = 56 #for subset
+num_subjects = 229 # for full
 
 print("".join(["data_file_path: (", data_file_path, ")"]), flush=True)
 print("".join(["batch_size: (", str(batch_size), ")"]), flush=True)
 print("".join(["num_folds: (", str(num_folds), ")"]), flush=True)
+print("".join(["dim_z: (", str(dim_z), ")"]), flush=True)
 print("".join(["num_epoch: (", str(num_epoch), ")"]), flush=True)
-
+print("".join(["num_subjects: (", str(num_subjects), ")"]), flush=True)
+print("".join(["input_shape:"]), flush=True)
+print(input_shape, flush=True)
 
 def train(fold, train_patient_indexes, val_patient_indexes):
 
@@ -117,7 +123,7 @@ def train(fold, train_patient_indexes, val_patient_indexes):
 
 def main():
     # prepare indexes of patients for training and validation, respectively
-    num_patients = 229
+    num_patients = num_subjects
     patients_indexes = np.array([i for i in range(num_patients)])
     kf = KFold(n_splits=num_folds, shuffle=False)
 
