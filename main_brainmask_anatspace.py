@@ -11,7 +11,7 @@ from sklearn.model_selection import KFold
 from utils import get_score_from_all_slices
 from model import create_xception_unet_n
 from loss import get_loss, dice
-from data_brainmask import create_train_date_generator, create_val_date_generator
+from data import create_train_date_generator, create_val_date_generator
 
 
 #default from github source
